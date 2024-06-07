@@ -1,6 +1,5 @@
 package com.org.StayEase.configs.SpringSecurityConfig;
 
-
 import com.org.StayEase.entities.User;
 import com.org.StayEase.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
