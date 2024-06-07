@@ -45,10 +45,11 @@ public class UserController {
     }
 
     @PreAuthorize("hasAnyRole('ADMIN','HOTEL_MANAGER')")
-    @DeleteMapping
-    public ResponseEntity<String> deleteUser(@RequestBody String email){
-        userService.deleteUser(email);
-        return new ResponseEntity<>("User with emailId "+email+" has been removed successfully...!!!", HttpStatus.OK);
+    @DeleteMapping("/{userId}")
+    public ResponseEntity<String> deleteUser(@PathVariable Long userId){
+        System.out.println("\nEmail : "+userId);
+        userService.deleteUser(userId);
+        return new ResponseEntity<>("User with userId "+userId+" has been removed successfully...!!!", HttpStatus.OK);
     }
 
 }

@@ -23,7 +23,7 @@ public class HotelController {
         return ResponseEntity.ok().body(hotelService.getAllHotels());
     }
 
-    @PostMapping("/{hotelId}")
+    @GetMapping("/{hotelId}")
     public ResponseEntity<Hotel> getHotelById(@PathVariable Long hotelId) {
         return ResponseEntity.ok().body(hotelService.getHotelById(hotelId));
     }

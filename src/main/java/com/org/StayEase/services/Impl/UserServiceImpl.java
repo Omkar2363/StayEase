@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
+
 import java.util.List;
 
 @Service
@@ -75,9 +77,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUser(String emailId) {
-        User user = userRepository.findByEmail(emailId)
+    public void deleteUser(Long userId) {
+        User user = userRepository.findById(userId)
                 .orElseThrow(()-> new UsernameNotFoundException("User Not Found...!!!"));
+        System.out.println("\n\nUser : "+user);
         userRepository.delete(user);
     }
 
