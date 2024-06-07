@@ -1,9 +1,11 @@
 package com.org.StayEase.controllers;
 
-import com.org.StayEase.dtos.LoginRequest;
+import com.org.StayEase.configs.JWTConfig.JWTHelper;
+import com.org.StayEase.dtos.LoginRequestDto;
+import com.org.StayEase.dtos.LoginResponseDto;
 import com.org.StayEase.dtos.RegistrationDto;
 import com.org.StayEase.entities.User;
-import com.org.StayEase.services.UserService;
+import com.org.StayEase.services.Impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +28,10 @@ public class AuthController {
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private UserService userService;
+    private JWTHelper jwtHelper;
+
+    @Autowired
+    private UserServiceImpl userService;
 
     @PostMapping("/register")
     public ResponseEntity<User> registerUser(@RequestBody RegistrationDto registrationDto) {
@@ -34,10 +39,14 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> loginUser(@RequestBody LoginRequest loginRequest) throws Exception {
+    public ResponseEntity<LoginResponseDto> loginUser(@RequestBody LoginRequestDto loginRequest) throws Exception {
         this.doAuthenticate(loginRequest.getEmail(), loginRequest.getPassword());
 
-        return ResponseEntity.ok().body("Login Successfully...!!!");
+        final UserDetails userDetails = userDetailsService.loadUserByUsername(loginRequest.getEmail());
+        String jwtToken = this.jwtHelper.generateToken(userDetails);
+
+        LoginResponseDto response = new LoginResponseDto(jwtToken, userDetails.getUsername());
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     private void doAuthenticate(String email, String password){

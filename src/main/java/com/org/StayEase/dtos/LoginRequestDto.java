@@ -3,7 +3,7 @@ package com.org.StayEase.dtos;
 import lombok.Data;
 
 @Data
-public class LoginRequest {
+public class LoginRequestDto {
 
     private String email;
     private String password;
