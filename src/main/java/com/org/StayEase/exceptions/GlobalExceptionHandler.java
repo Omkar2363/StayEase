@@ -33,6 +33,14 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(message);
     }
 
+
+    @ExceptionHandler(BookingNotFoundException.class)
+    public ResponseEntity<String> BookingNotFoundExceptionHandler(BookingNotFoundException ex) {
+        String message = ex.getMessage();
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(message);
+    }
+
+
     @ExceptionHandler(HotelAlreadyExistException.class)
     public ResponseEntity<String> HotelAlreadyExistExceptionHandler(HotelAlreadyExistException ex) {
         String message = ex.getMessage();
