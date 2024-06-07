@@ -40,6 +40,14 @@ public class SecurityConfig {
                 .cors(cors -> cors.disable())
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/register", "/login").permitAll()
+                        .requestMatchers(
+                                "/v3/api-docs/**",  // OpenAPI 3.0 endpoints
+                                "/swagger-ui/**",           // Swagger UI resources
+                                "/swagger-ui.html",         // Swagger UI HTML page
+                                "/swagger-resources/**",
+                                "/webjars/**",
+                                "/api/auth/**" // Allow unauthenticated access to authentication endpoints
+                        ).permitAll()
                         .anyRequest().authenticated())
                 .exceptionHandling(ex -> ex.authenticationEntryPoint(entryPoint))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
