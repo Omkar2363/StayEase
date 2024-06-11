@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -89,6 +90,7 @@ public class UserServiceImpl implements UserService {
                     return new UsernameNotFoundException("User Not Found...!!!");
                 });
         user.setId(oldUser.getId());
+        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         User updatedUser = userRepository.save(user);
         logger.info("User updated with id: {}", updatedUser.getId());
         return updatedUser;
