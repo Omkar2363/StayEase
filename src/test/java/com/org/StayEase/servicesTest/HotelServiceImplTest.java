@@ -89,12 +89,13 @@ class HotelServiceImplTest {
 
     @Test
     void testUpdateHotel_Success() {
-        when(hotelRepository.findById(anyLong())).thenReturn(Optional.of(hotel));
-        when(hotelRepository.save(any(Hotel.class))).thenReturn(hotel);
-
         Hotel updateHotel = new Hotel();
         updateHotel.setName("Updated Hotel");
         updateHotel.setLocation("Updated Location");
+
+
+        when(hotelRepository.findById(anyLong())).thenReturn(Optional.of(updateHotel));
+        when(hotelRepository.save(any(Hotel.class))).thenReturn(updateHotel);
 
         Hotel updatedHotel = hotelService.updateHotel(1L, updateHotel);
 
