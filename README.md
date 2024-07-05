@@ -120,9 +120,16 @@ To run the application use following command.
 
 #### 5. Access the APIs:
 
-Once the application is running, you can access the API at
+##### a. Local Server : 
+Once the application is running locally, you can access the API at 
 
     http://localhost:8080
+
+##### b. Deployed Server : 
+As the application is deployed successfully, you can access the API as mentioned
+    
+    https://stayeasedeploy.onrender.com/swagger-ui/index.html
+
 
 
 ## Running Tests :
@@ -163,9 +170,9 @@ Use the following command to run the unit tests :
 - Read Booking  : GET /bookings/{bookingId}
 - Read Bookings : GET /bookings 
 
-#### NOTE : Use the following link to read all the API Documentation only after running the application.
+#### NOTE : Use the following link to read all the API Documentation.
 
-[API Documentation using OpenAPI](http://localhost:8080/swagger-ui/index.html)
+[API Documentation using OpenAPI](https://stayeasedeploy.onrender.com/swagger-ui/index.html)
 ## Postman Collection
 
 A Postman collection has been included to test the API endpoints. Import the collection into Postman and start testing the API.
